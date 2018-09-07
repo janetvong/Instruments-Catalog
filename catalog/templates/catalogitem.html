@@ -1,0 +1,80 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+	<div class="row divider green">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner catalog">
+		<div class="col-md-11 col-md-offset-1 padding-none">
+			<h1>{{ instrument.name }}
+			<figure class="creator">
+				<img class="img-responsive" src="{{ creator.picture}}">
+				<figcaption>{{ creator.name }}</figcaption>
+			</figure>
+			</h1>
+
+		</div>
+	</div>
+
+<div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+</div>
+
+
+	<div class="row padding-top padding-bottom">
+		<div class="col-md-1"></div>
+		<div class="col-md-11 padding-none">
+			<a href="{{url_for('editInstrument', instrument_id = instrument.id )}}">
+				<button class="btn btn-default" id="new-catalog-item">
+					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Edit Instrument Category
+				</button>
+			</a>
+			<a href="{{url_for('newCatalogItem', instrument_id = instrument.id )}}">
+				<button class="btn btn-default" id="new-catalog-item">
+					<span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span>Add Catalog Item
+				</button>
+			</a>
+			<a href="{{url_for('deleteInstrument', instrument_id = instrument.id )}}">
+							<button class="btn btn-default delete" id="delete-restaurant">
+								<span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span>Delete Instrument
+							</button>
+			</a>
+		</div>
+		<div class="col-md-7"></div>
+	</div>
+
+	{% if items !=[] %}
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-md-9">
+				<h2>{{ instrument.name }} Catalog </h2>
+					{% for i in items %}
+							<div class="catalog-item">
+								<h3>{{i.name}}</h3>
+								<p>{{i.description}}</p>
+								<p class="catalog-price">{{i.price}}</p>
+								<p>Warranty - {{i.warranty}}</p>
+								<p><img class="img-responsive catalog_image" src="{{i.picture}}"></p>
+								<a href='{{url_for('editCatalogItem', instrument_id = instrument.id, catalogitem_id=i.id ) }}'>Edit</a>
+								<a href='{{url_for('deleteCatalogItem', instrument_id = instrument.id, catalogitem_id=i.id ) }}'>   Delete</a>
+							</div>
+					{% endfor %}
+			</div>
+
+			<div class="col-md-3">
+
+			</div>
+			<div class="col-md-1"></div>
+		</div>
+	{% endif %}
+{% endblock %}

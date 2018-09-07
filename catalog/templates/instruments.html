@@ -1,0 +1,55 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+	<div class="row catalog-top">
+		<div class="col-md-11"></div>
+		<div class="col-md-3 text-right">
+					</div>
+	</div>
+	<div class="row divider blue">
+		<div class="col-md-12"></div>
+	</div>
+	<div class="row banner main">
+		<div class="col-md-1"></div>
+		<div class="col-md-11 padding-none">
+			<h1 class="main_title">Instruments & Accessories</h1>
+		</div>
+	</div>
+
+<div class = 'flash'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+
+</div>
+
+	<div class="row padding-top padding-bottom">
+		<div class="col-md-1"></div>
+		<div class="col-md-10 padding-none">
+			<a href="{{url_for('newInstrument')}}">
+				<button class="btn btn-default" id="new-instrument">
+					<span class="glyphicon glyphicon-music" aria-hidden="true"></span>Add Instrument Category
+				</button>
+			</a>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+	{% for instrument in instruments %}
+	<a href = "{{url_for('showCatalogItem', instrument_id = instrument.id)}}">
+			<div class="row">
+				<div class="col-md-1"></div>
+					<div class="col-md-10 instrument-list">
+						<h3>{{instrument.name}}</h3>
+					</div>
+				<div class="col-md-3"></div>
+			</div>
+		</a>
+	{% endfor %}
+{% endblock %}
