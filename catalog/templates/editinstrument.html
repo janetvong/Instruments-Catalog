@@ -14,7 +14,7 @@
 			<div class="form-group">
 				<form action="{{ url_for('editInstrument',instrument_id = instrument.id)}}" method = "post">
 					<label for="name">Name:</label>
-					<input type ="text" class="form-control" name="name" value="{{instrument.name }}">
+					<input type ="text" class="form-control" name="name" value="{{instrument.name }}" required minlength="2">
 					<div class="padding-bottom"></div>
 					<button type="submit" class="btn btn-default" id="submit" type="submit">
 					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Save</button>
